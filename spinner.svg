@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="40" height="40">
+  <defs>
+    <linearGradient id="arcGradientMini" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+  <circle
+    cx="25"
+    cy="25"
+    r="20"
+    fill="none"
+    stroke="url(#arcGradientMini)"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-dasharray="70 125"
+  >
+    <!-- Rotation -->
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="0 25 25"
+      to="360 25 25"
+      dur="1.2s"
+      repeatCount="indefinite" />
+    <!-- Pulse effect -->
+    <animate
+      attributeName="stroke-dasharray"
+      values="45 125; 70 125; 95 125; 70 125; 45 125"
+      dur="2s"
+      repeatCount="indefinite" />
+  </circle>
+</svg>
