@@ -1,5 +1,6 @@
 // * Links the HTML elements to JavaScript Variables
-const body = document.querySelector(`body`);
+// * Change 'body' to 'appContainer' for clarity and correct targeting
+const appContainer = document.querySelector(`#app`);
 const searchButton = document
   .getElementById(`searchButton`)
   .addEventListener(`click`, fetchWeather);
@@ -103,27 +104,38 @@ function showMessage(msg) {
   weatherDisplay.textContent = msg;
 }
 function toggleLoading(show) {
-  // * Uses a Ternary Operator Structure 'Condition ? Value if True : Value if False'
+  // * Uses a Ternary Operator Structure 'Condition?ValueifTrue:ValueifFalse'
   // * So it's the same as if(show = true) set the value to block, if(show = false) set the value to none
   loading.style.display = show ? `block` : `none`;
 }
 function clearDisplay() {
   weatherDisplay.innerHTML = ``;
-  body.style.backgroundColor = "#FFFFFF";
-  body.style.color = "#2B2B2B";
+  appContainer.style.setProperty(`--weather-bg`, `var(--main-bg-color)`);
+  appContainer.style.setProperty(`--weather-text`, `var(--main-text-color)`);
 }
+
 function changeBackground(description) {
-  body.style.transition = `0.5s`;
-  if (description.includes(`rain`)) {
-    body.style.backgroundColor = "#73d0e7ff";
-    body.style.color = "#353535ff";
-  } else if (description.includes(`clouds`)) {
-    body.style.backgroundColor = "#727272ff";
-    body.style.color = "#f3f3f3ff";
-  } else if (description.includes(`clear`)) {
-    body.style.backgroundColor = "#FFFFFFFF";
-    body.style.color = "#353535ff";
+  let newBgColor;
+  let newTextColor;
+
+  if (description.includes(`rain`) || description.includes(`drizzle`)) {
+    newBgColor = "#73d0e7ff"; // Light Blue
+    newTextColor = "#353535ff";
+  } else if (description.includes(`clouds`) || description.includes(`mist`)) {
+    newBgColor = "#727272ff"; // Grey
+    newTextColor = "#f3f3f3ff";
+  } else if (description.includes(`clear`) || description.includes(`sun`)) {
+    newBgColor = "#FFFFFFFF"; // White/Light Yellow
+    newTextColor = "#353535ff";
+  } else {
+    // Default back to universal theme color for unknown weather
+    appContainer.style.setProperty(`--weather-bg`, `var(--main-bg-color)`);
+    appContainer.style.setProperty(`--weather-text`, `var(--main-text-color)`);
+    return;
   }
+
+  appContainer.style.setProperty(`--weather-bg`, newBgColor);
+  appContainer.style.setProperty(`--weather-text`, newTextColor);
 }
 
 // * Formatting Functions to convert the raw Unix Timestamps in to user-friendly readable strings by using ternary operators and the Intl.RelativeTimeFormat
@@ -143,12 +155,12 @@ function formatDateUTC(unix) {
   // * If hours is less than 12 we use AM. If it's greater than 12 we use PM and use the ternary operator structure to subtract 12.
   if (hours < 12) {
     ampm = `AM`;
-    // * Uses a Ternary Operator Structure 'Condition ? Value if True : Value if False'
+    // * Uses a Ternary Operator Structure 'Condition?ValueifTrue:ValueifFalse'
     // * So it's the same as if(hours12 === 0) set the value to 12, if(hours12 !== 0) set the value to hours
     hours12 = hours === 0 ? 12 : hours;
   } else {
     ampm = `PM`;
-    // * Uses a Ternary Operator Structure 'Condition ? Value if True : Value if False'
+    // * Uses a Ternary Operator Structure 'Condition?ValueifTrue:ValueifFalse'
     // * So it's the same as if(hours12 === 12) set the value to 12, if(hours12 !== 12) set the value to hours - 12
     hours12 = hours === 12 ? 12 : hours - 12;
   }

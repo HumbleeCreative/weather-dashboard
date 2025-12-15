@@ -3,24 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="preload"
+      href="/HumbleeCreative.github.io/header.css"
+      as="style"
+    />
+    <link
+      rel="preload"
+      href="/HumbleeCreative.github.io/footer.css"
+      as="style"
+    />
+
+    <link rel="stylesheet" href="/HumbleeCreative.github.io/style.css" />
+
     <link rel="stylesheet" href="style.css" />
+
     <title>Weather Dashboard</title>
   </head>
+
   <body>
-    <div id="app">
-      <input type="text" id="cityInput" placeholder="Enter a city name..." />
-      <button id="searchButton">Search</button>
-      <div id="loading" style="display: none">
-        <div id="spinner">
-          <img src="spinner.svg" />
+    <script src="/HumbleeCreative.github.io/headerFooterManager.js"></script>
+
+    <div id="flex-layout">
+      <custom-header class="fouc-hidden"></custom-header>
+
+      <main>
+        <div id="top"></div>
+
+        <div id="app">
+          <input
+            type="text"
+            id="cityInput"
+            placeholder="Enter a city name..."
+          />
+          <button id="searchButton">Search</button>
+          <div id="loading" style="display: none">
+            <div id="spinner">
+              <img src="spinner.svg" />
+            </div>
+            <p>Loading Weather Data...</p>
+          </div>
+          <div id="weatherDisplay"></div>
         </div>
-        <p>Loading Weather Data...</p>
-      </div>
-      <div id="weatherDisplay"></div>
-      <!-- App Content goes here -->
+      </main>
+
+      <custom-footer class="fouc-hidden"></custom-footer>
     </div>
 
     <script src="config.js"></script>
     <script src="script.js" defer></script>
+
+    <script src="/HumbleeCreative.github.io/script.js"></script>
   </body>
 </html>

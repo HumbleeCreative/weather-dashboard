@@ -1,18 +1,68 @@
-body {
-  font-family: sans-serif;
+/* weather-dashboard/style.css */
 
+/* ---------------------------------------------------------------------- */
+/* * LAYOUT & COMPONENT STYLING (Project Specific) * */
+/* * This file focuses on structure. Colors are inherited from the universal style.css * */
+/* ---------------------------------------------------------------------- */
+
+/* * 1. Target the app container for project-specific alignment and sizing. 
+ * The body padding, font-family, and core colors are handled by the 
+ * universal style.css and the <body> theme classes.
+ */
+#app {
+  /* Aligns content within the main area */
   text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 
-  padding: 2rem;
+  /* * FIX: Default value for the weather background variable.
+   * We default it to the universal background color.
+   */
+  --weather-bg: var(--main-bg-color);
+  --weather-text: var(--main-text-color);
+
+  /* Apply the new variable to the background */
+  background-color: var(--weather-bg);
+
+  /* Ensure the text color uses the universal theme color */
+  color: var(--weather-text);
+
+  /* Smooth transition for the weather background color */
+  transition: background-color 0.5s ease-in-out;
 }
 
+/* * 2. Input and Button Styling 
+ * Crucially, these now use the theme variables for colors and borders.
+ */
 input,
 button {
+  /* Layout: Keep your project's desired spacing */
   margin: 1rem;
-
   padding: 0.5rem;
+
+  /* Theme Integration: Use universal variables for dynamic coloring */
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+  border: 1px solid var(--main-accent-highlight);
+
+  /* Ensure smooth transition */
+  transition: all 0.5s ease-in-out;
 }
 
+/* Hover state using the accent color */
+button:hover {
+  background-color: var(--main-accent-highlight);
+  color: var(--main-bg-color); /* Swap text color for contrast */
+  cursor: pointer;
+}
+
+/* * 3. Weather Display Styling 
+ * (Add any necessary forecast card, icon, or data styles here)
+ */
 #weatherDisplay {
+  /* Keep your project's desired spacing */
   margin-top: 2rem;
+
+  /* If #weatherDisplay has a background or border, use theme variables for it! */
 }
